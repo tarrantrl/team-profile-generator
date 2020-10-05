@@ -1,0 +1,28 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarrantrl/team-profile-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarrantrl/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/tarrantrl/team-profile-generator#readme",
+  "devDependencies": {
+    "jest": "^26.5.0"
+  },
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
