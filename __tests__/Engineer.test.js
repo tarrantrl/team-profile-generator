@@ -6,7 +6,7 @@ const Engineer = require('../lib/Engineer');
 test('creates an engineer object',() => {
     // create an engineer object instance
     const engineer = new Engineer('Jan', 'jn1', 'jan@work.com', 'jandev');
-    // check that the name, id, email, and office number fields are correctly created
+    // check that the name, id, email, and github fields are correctly created
     expect(engineer.name).toBe('Jan');
     expect(engineer.id).toBe('jn1');
     expect(engineer.email).toBe('jan@work.com');
