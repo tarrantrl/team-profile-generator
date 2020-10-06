@@ -11,3 +11,36 @@ test('creates an employee object',() => {
     expect(employee.id).toBe('jn1');
     expect(employee.email).toBe('jan@work.com');
 })
+
+// test getName function
+test('gets the name of the employee', () => {
+    // create an employee object instance
+    const employee = new Employee('Jan', 'jn1', 'jan@work.com');
+    // test getName
+    expect(employee.getName()).toBe('Jan');
+})
+
+// test getId function
+test('gets the id of the employee', () => {
+    // create an employee object instance
+    const employee = new Employee('Jan', 'jn1', 'jan@work.com');
+    // test getId
+    expect(employee.getId()).toBe('jn1');
+    // expect(employee.getId()).toEqual(expect(stringContaining(employee.id)));
+})
+
+// test getEmail function
+test('gets the email of the employee', () => {
+    // create an employee object instance
+    const employee = new Employee('Jan', 'jn1', 'jan@work.com');
+    // test getEmail
+    expect(employee.getEmail()).toBe('jan@work.com');
+})
+
+// test getRole function
+test('gets the role of the employee', () => {
+    // create an employee object instance
+    const employee = new Employee('Jan', 'jn1', 'jan@work.com');
+    // test getRole
+    expect(employee.getRole()).toBe('Employee');
+})
