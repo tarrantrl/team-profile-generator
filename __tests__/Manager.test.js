@@ -20,3 +20,11 @@ test('checks the role of the manager', () => {
     // check that getRole returns manager
     expect(manager.getRole()).toBe('Manager');
 })
+
+// test getOfficeNum function
+test('checks the office number of the manager', () => {
+    // create a manager object instance
+    const manager = new Manager('Jan', 'jn1', 'jan@work.com', 'PAR 3');
+    // check that getOfficeNum returns PAR 3
+    expect(manager.getOfficeNum()).toBe('PAR 3');
+})
