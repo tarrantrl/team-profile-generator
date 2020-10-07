@@ -1,70 +1,76 @@
-// creat about section
-const generateManager = manager => {
+// create employee cards
+const generateEmployees = employees => {
     return `
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">${manager.name}</h5>
-            <p class="card-text">${manager.role}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-        <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-    </div>
+    ${employees
+        .filter(({role}) => (role === "Manager"))
+        .map(employee => {
+            return `
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${employee.getName()}</h5>
+                    <p class="card-text">${employee.getRole()}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">${employee.getId()}</li>
+                    <li class="list-group-item"><a href="mailto:${employee.getEmail()}>${employee.getEmail()}</a></li>
+                    <li class="list-group-item">${employee.getOfficeNum()}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+            `
+        })
+    .join('')}
+    ${employees
+        .filter(({role}) => (role === "Engineer"))
+        .map(employee => {
+            return `
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${employee.getName()}</h5>
+                    <p class="card-text">${employee.getRole()}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">${employee.getId()}</li>
+                    <li class="list-group-item"><a href="mailto:${employee.getEmail()}>${employee.getEmail()}</a></li>
+                    <li class="list-group-item"><a href="https://github.com/${employee.getGithub()}">${employee.getGithub()}</a></li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+            `
+        })
+    .join('')}
+    ${employees
+        .filter(({role}) => (role === "Intern"))
+        .map(employee => {
+            return `
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${employee.getName()}</h5>
+                    <p class="card-text">${employee.getRole()}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">${employee.getId()}</li>
+                    <li class="list-group-item"><a href="mailto:${employee.getEmail()}>${employee.getEmail()}</a></li>
+                    <li class="list-group-item">${employee.getSchool()}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+            `
+        })
+    .join('')}
     `
 }
 
-// create project sections
-const generateProjects = projectsArr => {
-    return `
-      <section class="my-3" id="portfolio">
-        <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
-        <div class="flex-row justify-space-between">
-        ${projectsArr
-          .filter(({ feature }) => feature)
-          .map(({ name, description, languages, link }) => {
-            return `
-            <div class="col-12 mb-2 bg-dark text-light p-3">
-              <h3 class="portfolio-item-title text-light">${name}</h3>
-              <h5 class="portfolio-languages">
-                Built With:
-                ${languages.join(', ')}
-              </h5>
-              <p>${description}</p>
-              <a href="${link}" class="btn"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-            </div>
-          `;
-          })
-          .join('')}
-  
-        ${projectsArr
-          .filter(({ feature }) => !feature)
-          .map(({ name, description, languages, link }) => {
-            return `
-            <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-              <h3 class="portfolio-item-title text-light">${name}</h3>
-              <h5 class="portfolio-languages">
-                Built With:
-                ${languages.join(', ')}
-              </h5>
-              <p>${description}</p>
-              <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-            </div>
-          `;
-          })
-          .join('')}
-        </div>
-      </section>
-    `;
-  };
-
-module.exports = templateData => {
-    const {employees, ...manager} = templateData;
+module.exports = employees => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -83,7 +89,7 @@ module.exports = templateData => {
         
         </header>
         <main class="">
-            ${generateEmployee(employees)}
+            ${generateEmployees(employees)}
         </main>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
