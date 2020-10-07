@@ -2,6 +2,8 @@
 const inquirer = require('inquirer');
 
 const createObjects = require('./src/object-template');
+const generateTemplate = require('./src/page-template');
+const writeFile = require('./utils/generate-page');
 
 // function to prompt the user for manager info
 const promptUser = () => {
@@ -82,6 +84,12 @@ Add a New Employee
     // use inquirer to prompt the user for employee info
     return inquirer.prompt([
         {
+            type: "list",
+            name: "role",
+            message: "Select a type of employee to add or finish the team",
+            choices: ['Engineer', 'Intern', 'Finish Team'],
+        },
+        {
             type: "input",
             name: "name",
             message: "What is the employee's name?",
@@ -92,7 +100,14 @@ Add a New Employee
                     console.log("Please enter the employee's name!");
                     return false;
                 }
-            }
+            },
+            when: ({ role }) => {
+                if (role != 'Finish Team') {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
         },
         {
             type: "input",
@@ -105,7 +120,14 @@ Add a New Employee
                     console.log("Please enter the employee's id!");
                     return false;
                 }
-            }
+            },
+            when: ({ role }) => {
+                if (role != 'Finish Team') {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
         },
         {
             type: "input",
@@ -118,13 +140,14 @@ Add a New Employee
                     console.log("Please enter the manager's email!");
                     return false;
                 }
-            }
-        },
-        {
-            type: "list",
-            name: "role",
-            message: "What type of employee do you want to add?",
-            choices: ['Engineer', 'Intern'],
+            },
+            when: ({ role }) => {
+                if (role != 'Finish Team') {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
         },
         {
             type: "input",
@@ -173,6 +196,13 @@ Add a New Employee
             name: 'confirmAddEmployee',
             message: 'Would you like to add another employee?',
             default: false,
+            when: ({ role }) => {
+                if (role != 'Finish Team') {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
         }
     ])
         .then(employeeData => {
@@ -188,6 +218,8 @@ Add a New Employee
 promptUser()
     .then(promptEmployee)
     .then(teamData => {
-        console.log(createObjects(teamData));
-        
+        return writeFile(generateTemplate((createObjects(teamData))));
+    })
+    .catch(err => {
+        console.log(err);
     })
