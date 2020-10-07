@@ -1,19 +1,16 @@
 // require inquirer
 const inquirer = require('inquirer');
 
-// prompt user to choose 
-// all employees have name, id, and email
-// prompt for role
-// manager = office number
-// engineer = github
-// intern = school
+const createObjects = require('./src/object-template');
 
+// function to prompt the user for manager info
 const promptUser = () => {
     console.log(`
 =================
 Add the Manager
 =================
 `);
+    // use inquirer to prompt the user for manager information
     return inquirer
         .prompt([
             {
@@ -72,6 +69,7 @@ Add the Manager
 
 }
 
+// function to prompt the user for employee info
 const promptEmployee = teamData => {
     if (!teamData.employees) {
         teamData.employees = [];
@@ -81,6 +79,7 @@ const promptEmployee = teamData => {
 Add a New Employee
 =================
 `);
+    // use inquirer to prompt the user for employee info
     return inquirer.prompt([
         {
             type: "input",
@@ -131,6 +130,7 @@ Add a New Employee
             type: "input",
             name: "github",
             message: "What is the engineer's GitHub username?",
+            // only display github question if the type of employee is Engineer
             when: ({ role }) => {
                 if (role === 'Engineer') {
                     return true;
@@ -151,6 +151,7 @@ Add a New Employee
             type: "input",
             name: "school",
             message: "What is the intern's school?",
+            // only display school question when the type of employee is Intern
             when: ({ role }) => {
                 if (role === 'Intern') {
                     return true;
@@ -187,5 +188,6 @@ Add a New Employee
 promptUser()
     .then(promptEmployee)
     .then(teamData => {
-        console.log(teamData);
+        console.log(createObjects(teamData));
+        
     })
